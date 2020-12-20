@@ -250,7 +250,7 @@ module.exports = (req, res) => {
 /******************************************************************************/
 			case "respuestaAfirmativaConsejoSintomasSinRutaActiva":
 				try {
-					let sintoma = req.body.queryResult.inputContexts[0].parameters.sintomas
+					let sintoma = req.body.queryResult.outputContexts[0].parameters.sintomas
 					let enfermedad = []
 
 					for (let i in datosSintomas)
@@ -270,7 +270,7 @@ module.exports = (req, res) => {
 /******************************************************************************/
 			case "respuestaAfirmativaConsejoSintomasConRutaActiva":
 				try {
-					let sintoma = req.body.queryResult.inputContexts[0].parameters.sintomas
+					let sintoma = req.body.queryResult.outputContexts[0].parameters.sintomas
 					let enfermedad = []
 
 					for (let i in datosSintomas)
