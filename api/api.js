@@ -265,14 +265,8 @@ module.exports = (req, res) => {
 			try {
 				let monumento = req.body.queryResult.outputContexts[0].parameters.Monumentos
 				let horarios_1 = []
-
-				for (let i in horarios)
-				horarios_1.push([i, horarios[i]])
-
-				for(let i=0; i < descripciones_1.length; i++) {
-					if(descripciones_1[i][0] == monumento)
-						return res.send({fulfillmentText: "El horario de apertura es de : 9:00 a 13:00 y de 16:00 a 19:00"})
-				}
+				return res.send({fulfillmentText: "El horario de apertura es de : 9:00 a 13:00 y de 16:00 a 19:00"})
+				
 			}
 			catch (err) {
 				return res.send({fulfillmentText: "Error: " + err})
