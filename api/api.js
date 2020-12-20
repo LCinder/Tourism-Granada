@@ -243,7 +243,7 @@ module.exports = (req, res) => {
 /******************************************************************************/
 			case "respuestaDescripcionAfirmativa":
 				try {
-					let monumento = req.body.queryResult.outputContexts[0].parameters.descripcion
+					let monumento = req.body.queryResult.outputContexts[0].parameters.Descripcion
 					let descripciones_1 = []
 
 					for (let i in descripciones)
