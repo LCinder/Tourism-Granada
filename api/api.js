@@ -88,7 +88,7 @@ module.exports = (req, res) => {
 					let dia = new Date();
 					let horaActual = (dia.getUTCHours() + 1); // En Madrid UTC+1
 
-					if(horaActual > 13 && horaActual < 16)
+					if(horaActual > 13 && horaActual < 19)
 						cad += "\n\nSegun tu ubicación son las " + horaActual
 						+ ", ¿Quieres hacer un descanso para comer? "
 
