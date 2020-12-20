@@ -292,7 +292,7 @@ module.exports = (req, res) => {
 					}
 
 					for (let i=0; i < horasDisponibles.length; i++)
-						devolucion = devolucion +"las " + horasDisponibles[i] + ", "
+						devolucion = devolucion +"las " + ", "
 
 					return res.send({fulfillmentText: devolucion});
 
