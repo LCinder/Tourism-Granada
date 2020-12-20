@@ -327,7 +327,7 @@ module.exports = (req, res) => {
 
 					else {
 						return res.send({fulfillmentText: "El precio para "
-						+ monumento + " es de " + generarEntero(0, 20) + "€"});
+						+ tipoTicket + " es de " + generarEntero(0, 20) + "€"});
 					}
 
 				}
