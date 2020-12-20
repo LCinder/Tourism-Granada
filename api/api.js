@@ -309,7 +309,7 @@ module.exports = (req, res) => {
 				try {
 					let precio = 0;
 					let tipoTicket = req.body.queryResult.outputContexts[0].parameters.TipoCiudadano
-					let monumento = req.body.queryResult.outputContexts[0].parameters.Monumentos
+					let monumento = req.body.queryResult.outputContexts[3].parameters.Monumentos
 
 					if(monumento == "Alhambra") {
 						(async () => {
