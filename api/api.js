@@ -250,7 +250,7 @@ module.exports = (req, res) => {
 /******************************************************************************/
 			case "respuestaAfirmativaConsejoSintomasSinRutaActiva":
 				try {
-					let sintoma = req.body.queryResult.outputContexts[0].parameters.sintomas
+					let sintoma = req.body.queryResult.inputContexts[0].parameters.sintomas
 					let enfermedad = []
 
 					for (let i in datosSintomas)
@@ -258,7 +258,7 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < enfermedad.length; i++) {
 						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
+							return res.send({fulfillmentText: enfermedad[i][1]})
 					}
 				}
 				catch (err) {
@@ -270,15 +270,17 @@ module.exports = (req, res) => {
 /******************************************************************************/
 			case "respuestaAfirmativaConsejoSintomasConRutaActiva":
 				try {
-					let sintoma = req.body.queryResult.outputContexts[0].parameters.sintomas
+					let sintoma = req.body.queryResult.inputContexts[0].parameters.sintomas
 					let enfermedad = []
 
 					for (let i in datosSintomas)
 						enfermedad.push([i, datosSintomas[i]])
 
 					for(let i=0; i < enfermedad.length; i++) {
-						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
+						if(enfermedad[i][0] == sintoma){
+							let cad = enfermedad[i][1] + "\nQuizá sería conveniente que lo dejaras por hoy. ¿Quieres cancelar la ruta?"
+							return res.send({fulfillmentText: cad})
+						}
 					}
 				}
 				catch (err) {
