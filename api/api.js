@@ -288,7 +288,7 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < numHorasDisponibles; i++){
 						aux = generarEntero(0,horas.length-1)
-						if (horasDisponibles.findIndex(sonIguales(item,i))==-1){
+						if (horasDisponibles.includes(horas[aux])==false){
 							horasDisponibles.push(horas[aux])
 							devolucion = devolucion +"las "+ horas[aux] + ", "
 						}else{
