@@ -287,7 +287,7 @@ module.exports = (req, res) => {
 						aux = generarEntero(0,horas.length-1)
 						if (horasDisponibles.findIndex(horas[aux]) == -1){
 							horasDisponibles.push(horas[aux])
-							devolucion = devolucion +"las "+ JSON.stringify(horas[aux]) + ", "
+							//devolucion = devolucion +"las "+ JSON.stringify(horas[aux]) + ", "
 						}else{
 							i = i-1
 						}
