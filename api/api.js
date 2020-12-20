@@ -283,7 +283,7 @@ module.exports = (req, res) => {
 					let horasDisponibles = []
 					let aux = 0
 
-					for(let i=0; i < numHorasDisponibles; i++){
+					/*for(let i=0; i < numHorasDisponibles; i++){
 						aux = generarEntero(0,horas.length-1)
 						if (horasDisponibles.findIndex(horas[aux]) == -1){
 							horasDisponibles.push(horas[aux])
@@ -291,7 +291,7 @@ module.exports = (req, res) => {
 						}else{
 							i = i-1
 						}
-					}
+					}*/
 					
 						 
 
