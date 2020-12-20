@@ -217,68 +217,7 @@ module.exports = (req, res) => {
 						return res.send({fulfillmentText: "Ha habido algun error: " + err})
 					}
 				break;
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-			case "comprarEntradasDias":
-				try {
 
-					let numHorasDisponibles = generarEntero(1,horas.length)
-					let devolucion = "Las horas disponibles son: "
-					let horasDisponibles = []
-					let aux = 0
-
-					for(let i=0; i < numHorasDisponibles; i++){
-						aux = generarEntero(0,horas.length-1)
-						if (horasDisponibles.findIndex(horas[aux]) == -1)
-							horasDisponibles.push(horas[aux])
-						else
-							i = i-1
-					}
-
-					for (let i=0; i < horasDisponibles.length; i++)
-						devolucion = devolucion +"las " + horasDisponibles[i] + ", "
-
-					return res.send({fulfillmentText: devolucion});
-
-				}
-				catch (err) {
-					return res.send({fulfillmentText: "Error: " + err})
-				}
-			break;
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-			case "comprarEntradas":
-				try {
-					let precio = 0;
-					let tipoTicket = req.body.queryResult.outputContexts[0].parameters.TipoCiudadano
-					let monumento = req.body.queryResult.outputContexts[0].parameters.Monumentos
-
-					if(monumento == "Alhambra") {
-						(async () => {
-							entradas.getEntradas().then(entrad => {
-									for(let i=0; i < entrad.length; i++) {
-										if(entrad[i].tipo == tipoTicket) {
-											precio = entrad[i].precio
-											return res.send({fulfillmentText: "El precio para "
-											+ tipoTicket + " es de " + precio + "€. ¿Deseas comprarla?"});
-										}
-									}
-							});
-						})();
-					}
-
-					else {
-						return res.send({fulfillmentText: "El precio para "
-						+ monumento + " es de " + generarEntero(0, 20) + "€"});
-					}
-
-				}
-				catch (err) {
-					return res.send({fulfillmentText: "Error: " + err})
-				}
-			break;
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
