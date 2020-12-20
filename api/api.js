@@ -60,6 +60,9 @@ function elegirNSitios(tipo, nSitios) {
 function generarEntero(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
+function sonIguales(a,b) {
+	return a==b
+}
 /******************************************************************************/
 /*Llama a funcion que devuelve el precio de las entrdas de la Alhambra*********/
 /***************y espera el resultado mediante await para evitar responder*****/
