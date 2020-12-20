@@ -2,11 +2,16 @@
 const datos = require("./data.json")
 const datosSintomas = require("./sintomas.json")
 const entradas = require("./alhambra.js")
+const diasYHoras = require("./diasHoras.json")
+const descripciones = require("./descripciones.json")
+
 /******************************************************************************/
 /***********************Variables globales*************************************/
 /******************************************************************************/
 const monumentos = datos.monumentos
 const restaurantes = datos.restaurantes
+const dias = diasYHoras.dias
+const horas = diasYHoras.horas
 let ultimoLugarVisitado = ""
 let ruta = [];
 /******************************************************************************/
@@ -215,11 +220,40 @@ module.exports = (req, res) => {
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
+			case "comprarEntradasDias":
+				try {
+
+					let numHorasDisponibles = generarEntero(1,horas.length)
+					let devolucion = "Las horas disponibles son: "
+					let horasDisponibles = []
+					let aux = 0
+
+					for(let i=0; i < numHorasDisponibles; i++){
+						aux = generarEntero(0,horas.length-1)
+						if (horasDisponibles.findIndex(horas[aux]) == -1)
+							horasDisponibles.push(horas[aux])
+						else
+							i = i-1
+					}
+
+					for (let i=0; i < horasDisponibles.length; i++)
+						devolucion = devolucion +"las " + horasDisponibles[i] + ", "
+
+					return res.send({fulfillmentText: devolucion});
+
+				}
+				catch (err) {
+					return res.send({fulfillmentText: "Error: " + err})
+				}
+			break;
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
 			case "comprarEntradas":
 				try {
 					let precio = 0;
 					let tipoTicket = req.body.queryResult.outputContexts[0].parameters.TipoCiudadano
-					let monumento = req.body.queryResult.queryText
+					let monumento = req.body.queryResult.outputContexts[0].parameters.Monumentos
 
 					if(monumento == "Alhambra") {
 						(async () => {
@@ -228,7 +262,7 @@ module.exports = (req, res) => {
 										if(entrad[i].tipo == tipoTicket) {
 											precio = entrad[i].precio
 											return res.send({fulfillmentText: "El precio para "
-											+ tipoTicket + " es de " + precio + "€"});
+											+ tipoTicket + " es de " + precio + "€. ¿Deseas comprarla?"});
 										}
 									}
 							});
@@ -258,13 +292,54 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < enfermedad.length; i++) {
 						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: enfermedad[i][1]})
+							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
 					}
 				}
 				catch (err) {
 					return res.send({fulfillmentText: "Error: " + err})
 				}
 			break;
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+			case "respuestaDescripcionAfirmativa":
+				try {
+					let monumento = req.body.queryResult.outputContexts[0].parameters.descripcion
+					let descripciones_1 = []
+
+					for (let i in descripciones)
+					descripciones_1.push([i, descripciones[i]])
+
+					for(let i=0; i < descripciones_1.length; i++) {
+						if(descripciones_1[i][0] == monumento)
+							return res.send({fulfillmentText: "Informacion adicional: " + descripciones_1[i][1]})
+					}
+				}
+				catch (err) {
+					return res.send({fulfillmentText: "Error: " + err})
+				}
+			break;
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+		case "ConsultaHorarios":
+			try {
+				let monumento = req.body.queryResult.outputContexts[0].parameters.Monumentos
+				let horarios_1 = []
+
+				for (let i in horarios)
+				horarios_1.push([i, horarios[i]])
+
+				for(let i=0; i < descripciones_1.length; i++) {
+					if(descripciones_1[i][0] == monumento)
+						return res.send({fulfillmentText: "El horario de apertura es de : 9:00 a 13:00 y de 16:00 a 19:00"})
+				}
+			}
+			catch (err) {
+				return res.send({fulfillmentText: "Error: " + err})
+			}
+		break;
+
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -277,10 +352,8 @@ module.exports = (req, res) => {
 						enfermedad.push([i, datosSintomas[i]])
 
 					for(let i=0; i < enfermedad.length; i++) {
-						if(enfermedad[i][0] == sintoma){
-							let cad = enfermedad[i][1] + "\nQuizá sería conveniente que lo dejaras por hoy. ¿Quieres cancelar la ruta?"
-							return res.send({fulfillmentText: cad})
-						}
+						if(enfermedad[i][0] == sintoma)
+							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
 					}
 				}
 				catch (err) {
@@ -309,3 +382,4 @@ module.exports = (req, res) => {
 		return res.send({fulfillmentText: "Ha habido algun error: " + err})
 	}
 }
+
