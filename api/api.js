@@ -291,8 +291,9 @@ module.exports = (req, res) => {
 							i = i-1
 					}
 					
-					//for (let i=0; i < horasDisponibles.length; i++)
-						devolucion = devolucion +"las "+ horasDisponibles[0] + ", " 
+					for (let i=0; i < horasDisponibles.length; i++)
+						let auxiliar = horasDisponibles[i]
+						devolucion = devolucion +"las "+ auxiliar + ", " 
 
 					return res.send({fulfillmentText: devolucion});
 
