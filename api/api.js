@@ -234,7 +234,7 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < enfermedad.length; i++) {
 						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
+							return res.send({fulfillmentText: enfermedad[i][1]})
 					}
 				}
 				catch (err) {
@@ -351,7 +351,7 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < enfermedad.length; i++) {
 						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: "Consejo: " + enfermedad[i][1]})
+							return res.send({fulfillmentText: enfermedad[i][1] +". Veo que tienes una ruta activa, ¿quieres que la de por finalizada y descansas un poco?"})
 					}
 				}
 				catch (err) {
