@@ -351,7 +351,7 @@ module.exports = (req, res) => {
 
 					for(let i=0; i < enfermedad.length; i++) {
 						if(enfermedad[i][0] == sintoma)
-							return res.send({fulfillmentText: enfermedad[i][1] +". Veo que tienes una ruta activa, ¿quieres que la de por finalizada y descansas un poco?"})
+							return res.send({fulfillmentText: enfermedad[i][1] +". Quizá sería conveniente lo dejaras por hoy. ¿Quieres cancelar la ruta?"})
 					}
 				}
 				catch (err) {
